@@ -20,7 +20,6 @@ import os
 import grpc
 import logging
 
-# Error: External module import path is not yet working...
 from protos import routeguide_pb2
 from protos import routeguide_pb2_grpc
 from common import resources
