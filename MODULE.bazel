@@ -6,8 +6,12 @@ bazel_dep(name = "rules_python", version = "0.28.0")
 
 # Own modules
 bazel_dep(name = "bazel_demo_schema", version = "0.0.1")
-git_override(
+local_path_override(
     module_name = "bazel_demo_schema",
-    commit = "c82c0b550371e8bf6ae23e1c467677445292af4e",
-    remote = "https://github.com/thx123/bazel_demo_schema.git",
+    path = "../bazel_demo_schema",
 )
+# git_override(
+#     module_name = "bazel_demo_schema",
+#     commit = "c82c0b550371e8bf6ae23e1c467677445292af4e",
+#     remote = "https://github.com/thx123/bazel_demo_schema.git",
+# )

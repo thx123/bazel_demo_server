@@ -6,7 +6,6 @@ py_binary(
         "server.py",
     ],
     data = ["@bazel_demo_schema//data:routeguide_features"],
-    imports = ["."],
     python_version = "PY3",
     deps = [
         "@bazel_demo_schema//common:resources",

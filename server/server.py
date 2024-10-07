@@ -21,9 +21,9 @@ import grpc
 import logging
 
 # Error: External module import path is not yet working...
-import bazel_demo_schema.protos.routeguide_pb2
-import bazel_demo_schema.protos.routeguide_pb2_grpc
-import bazel_demo_schema.common.resources
+from protos import routeguide_pb2
+from protos import routeguide_pb2_grpc
+from common import resources
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
@@ -65,7 +65,7 @@ class RouteGuideServicer(routeguide_pb2_grpc.RouteGuideServicer):
         self.db = resources.read_route_guide_database()
 
     def GetFeature(self, request, context):
-        print("getting feature...")
+        print("GetFeature...")
         feature = get_feature(self.db, request)
         if feature is None:
             return routeguide_pb2.Feature(name="", location=request)
@@ -73,6 +73,7 @@ class RouteGuideServicer(routeguide_pb2_grpc.RouteGuideServicer):
             return feature
 
     def ListFeatures(self, request, context):
+        print("ListFeatures...")
         left = min(request.lo.longitude, request.hi.longitude)
         right = max(request.lo.longitude, request.hi.longitude)
         top = max(request.lo.latitude, request.hi.latitude)
@@ -85,6 +86,7 @@ class RouteGuideServicer(routeguide_pb2_grpc.RouteGuideServicer):
                 yield feature
 
     def RecordRoute(self, request_iterator, context):
+        print("RecordRoute...")
         point_count = 0
         feature_count = 0
         distance = 0.0
@@ -108,6 +110,7 @@ class RouteGuideServicer(routeguide_pb2_grpc.RouteGuideServicer):
             elapsed_time=int(elapsed_time))
 
     def RouteChat(self, request_iterator, context):
+        print("RouteChat...")
         prev_notes = []
         for new_note in request_iterator:
             for prev_note in prev_notes:
